@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Optimizing development | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Go-JavaScript-next.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Wing-It-Like-a-Pro.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="5.1" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -443,7 +443,7 @@
                 
     
         
-        <li class="chapter " data-level="5.1" data-path="Optimizing-Development.html">
+        <li class="chapter active" data-level="5.1" data-path="Optimizing-Development.html">
             
                 
                     <a href="./Optimizing-Development.html">
@@ -664,9 +664,92 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_19">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <p>We talked about how you could use the minified versions of your dependencies in development to make the rebundling go as fast as possible. Let us look at a small helper you can implement to make this a bit easier to handle.</p>
+<p><em>webpack.config.js</em></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'node_modules'</span>);
+
+<span class="hljs-keyword">var</span> deps = [
+  <span class="hljs-string">'angular/angular.min.js'</span>,
+  <span class="hljs-string">'moment/min/moment.min.js'</span>,
+  <span class="hljs-string">'underscore/underscore-min.js'</span>,
+];
+
+<span class="hljs-keyword">var</span> config = {
+  entry: [
+    <span class="hljs-string">'webpack/hot/dev-server'</span>,
+    <span class="hljs-string">'./app/main.js'</span>
+  ],
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'./build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  resolve: {
+    alias: {}
+  },
+  <span class="hljs-built_in">module</span>: {
+    noParse: [],
+    loaders: []
+  }
+};
+
+<span class="hljs-comment">// Run through deps and extract the first part of the path, </span>
+<span class="hljs-comment">// as that is what you use to require the actual node modules </span>
+<span class="hljs-comment">// in your code. Then use the complete path to point to the correct</span>
+<span class="hljs-comment">// file and make sure webpack does not try to parse it</span>
+deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(dep)</span> </span>{
+  <span class="hljs-keyword">var</span> depPath = path.resolve(node_modules_dir, dep);
+  config.resolve.alias[dep.split(path.sep)[<span class="hljs-number">0</span>]] = depPath;
+  config.module.noParse.push(depPath);
+});
+
+<span class="hljs-built_in">module</span>.exports = config;
+</code></pre>
+<p>Not all modules include a minified distributed version of the lib, but most do. Especially with large libraries like Angular JS you will get a significant improvement.</p>
+<h2 id="exposing-angular-to-the-global-scope">Exposing Angular to the global scope</h2>
+<p>You might be using distributed versions that requires Angular JS on the global scope. To fix that you can install the expose-loader by <code>npm install expose-loader --save-dev</code> and set up the following config, focusing on the <em>module</em> property:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'node_modules'</span>);
+
+<span class="hljs-keyword">var</span> deps = [
+  <span class="hljs-string">'angular/angular.min.js'</span>,
+  <span class="hljs-string">'moment/min/moment.min.js'</span>,
+  <span class="hljs-string">'underscore/underscore-min.js'</span>,
+];
+
+<span class="hljs-keyword">var</span> config = {
+  entry: [<span class="hljs-string">'webpack/hot/dev-server'</span>, <span class="hljs-string">'./app/main.js'</span>],
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'./build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  resolve: {
+    alias: {}
+  },
+  <span class="hljs-built_in">module</span>: {
+    noParse: [],
+
+    <span class="hljs-comment">// Use the expose loader to expose the minified Angular JS</span>
+    <span class="hljs-comment">// distribution.</span>
+    loaders: [{
+      test: path.resolve(node_modules_dir, deps[<span class="hljs-number">0</span>]),
+      loader: <span class="hljs-string">"expose?angular"</span>
+    }]
+  }
+};
+
+deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(dep)</span> </span>{
+  <span class="hljs-keyword">var</span> depPath = path.resolve(node_modules_dir, dep);
+  config.resolve.alias[dep.split(path.sep)[<span class="hljs-number">0</span>]] = depPath;
+  config.module.noParse.push(depPath);
+});
+
+<span class="hljs-built_in">module</span>.exports = config;
+</code></pre>
 
                     
                     </section>
@@ -677,10 +760,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Wing-It-Like-a-Pro.html" class="navigation navigation-prev " aria-label="Previous page: Wing It Like A Pro"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Go-JavaScript-next.html" class="navigation navigation-next " aria-label="Next page: Go JavaScript next"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Configuring Angular JS | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Optimizing-Rebundling.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Introduction-to-Angular-JS.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="2.1" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -169,7 +169,7 @@
                 
     
         
-        <li class="chapter " data-level="2.1" data-path="Configuring-Angular-JS.html">
+        <li class="chapter active" data-level="2.1" data-path="Configuring-Angular-JS.html">
             
                 
                     <a href="./Configuring-Angular-JS.html">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -664,9 +664,58 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_6">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <h2 id="installing-angular-js">Installing Angular JS</h2>
+<p><code>npm install angular --save</code></p>
+<p>There is really nothing more to it. You can now start using Angular JS in your code. In this project we are using ES6 module loader sytax, where <code>import controller from &#39;./controllers.js;</code> is equivalent to <code>var controller = require(&#39;./controllers.js&#39;);</code>.</p>
+<h2 id="using-angular-js-in-the-code">Using Angular JS in the code</h2>
+<p><em>In any file</em></p>
+<pre><code class="lang-javascript">import controller from <span class="hljs-string">'./controllers.js'</span>;
+
+angular
+
+  .module(<span class="hljs-string">'main'</span>, [])
+
+  .controller(<span class="hljs-string">'mainController'</span>, controller);
+</code></pre>
+<h2 id="including-angular-js-as-a-plugin">Including Angular JS as a plugin</h2>
+<p>To use use Angular JS in your JavaScript modules, you can use webpack to make Angular available as a global to all modules. Otherwise, you can require Angular in any module file where you need it.</p>
+<p><code>var angular = require(&#39;angular&#39;);</code></p>
+<p>Here&#39;s how we configure webpack to use Angular as a plugin.</p>
+<p><em>webpack.config.js</em></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-built_in">module</span>.exports = {
+  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  plugins: [
+    <span class="hljs-keyword">new</span> webpack.ProvidePlugin({
+      <span class="hljs-string">'angular'</span>: <span class="hljs-string">'angular'</span>
+    })
+  ]
+};
+</code></pre>
+<p>Webpack will map modules to free variables. In this case, any time you use the free variable <code>angular</code> inside a module, webpack will set angular to <code>require(&#39;angular&#39;)</code>.</p>
+<h2 id="including-angular-js-as-an-external">Including Angular JS as an external</h2>
+<p>If you are writing for a page that will already have Angular loaded, you can use webpack externals. This defines a global variable for all your modules, and assumes it will be available. You may need to include the variable as a JShint global as well to avoid hinting errors.</p>
+<p>Here&#39;s how we configure webpack to use Angular as an external.</p>
+<p><em>webpack.config.js</em></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-built_in">module</span>.exports = {
+  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  externals: {
+    <span class="hljs-string">'angular'</span>: <span class="hljs-string">'angular'</span>
+  }
+};
+</code></pre>
+<p>You can map other global libraries which may not be a part of your app to externals as well. Be aware this will development with webpack-dev-server, since you&#39;ll have to include script tags for those sources in your <code>index.html</code>.</p>
 
                     
                     </section>
@@ -677,10 +726,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Introduction-to-Angular-JS.html" class="navigation navigation-prev " aria-label="Previous page: Angular JS"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Optimizing-Rebundling.html" class="navigation navigation-next " aria-label="Next page: Optimizing rebundling"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Inlining images | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Inlining-Fonts.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Loading-LESS-or-SASS.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="3.4" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -287,7 +287,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.4" data-path="Inlining-Images.html">
+        <li class="chapter active" data-level="3.4" data-path="Inlining-Images.html">
             
                 
                     <a href="./Inlining-Images.html">
@@ -664,9 +664,29 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_11">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <p>Until HTTP/2 is here you want to avoid setting up too many HTTP requests when your application is loading. Depending on the browser you have a set number of requests that can run in parallel. If you load a lot of images in your CSS it is possible to automatically inline these images as BASE64 strings to lower the number of requests required. This can be based on the size of the image. There is a balance of size of download and number of downloads that you have to figure out for your project, and Webpack makes that balance easy to adjust.</p>
+<h2 id="installing-the-url-loader">Installing the url-loader</h2>
+<p><code>npm install url-loader --save-dev</code> will install the loader that can convert resolved paths as BASE64 strings. As mentioned in other sections of this cookbook Webpack will resolve &quot;url()&quot; statements in your CSS as any other require or import statements. This means that if we test on image file extensions for this loader we can run them through it.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> config = {
+  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  <span class="hljs-built_in">module</span>: {
+    loaders: [
+      {
+        test: <span class="hljs-regexp">/\.(png|jpg)$/</span>,
+        loader: <span class="hljs-string">'url?limit=25000'</span>
+      }
+    ]
+  }
+};
+</code></pre>
+<p>The limit is an argument passed to the url-loader. It tells it that images that are 25KB or smaller in size will be converted to a BASE64 string and included in the CSS file where it is defined.</p>
 
                     
                     </section>
@@ -677,10 +697,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-prev " aria-label="Previous page: Loading LESS or SASS"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Inlining-Fonts.html" class="navigation navigation-next " aria-label="Next page: Inlining fonts"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Optimizing caching | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Matchers.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Go-JavaScript-next.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="5.3" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -475,7 +475,7 @@
         </li>
     
         
-        <li class="chapter " data-level="5.3" data-path="Optimizing-Caching.html">
+        <li class="chapter active" data-level="5.3" data-path="Optimizing-Caching.html">
             
                 
                     <a href="./Optimizing-Caching.html">
@@ -664,9 +664,20 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_18">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <p>When users hit the URL of your application they will need to download different assets. CSS, JavaScript, HTML, images and fonts. The great thing about Webpack is that you can stop thinking how you should download all these assets. You can do it through JavaScript.</p>
+<blockquote>
+<p>OccurenceOrderPlugin</p>
+</blockquote>
+<h2 id="how-can-i-attach-hashes-to-my-production-output">How can I attach hashes to my production output?</h2>
+<ul>
+<li>Use <code>[hash]</code>. Example: <code>&#39;assets/bundle.[hash].js&#39;</code></li>
+</ul>
+<p>The benefit of this is that this will force the client to reload the file. There is more information about <code>[hash]</code> at <a href="http://webpack.github.io/docs/long-term-caching.html" target="_blank">the long term caching</a> section of the official documentation.</p>
+<blockquote>
+<p>Is it possible to change the hash only if bundle changed?</p>
+</blockquote>
 
                     
                     </section>
@@ -677,10 +688,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Go-JavaScript-next.html" class="navigation navigation-prev " aria-label="Previous page: Go JavaScript next"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Matchers.html" class="navigation navigation-next " aria-label="Next page: Matchers"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

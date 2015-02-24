@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Optimizing rebundling | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Angular-Template-Cache.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Configuring-Angular-JS.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="2.2" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -185,7 +185,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.2" data-path="Optimizing-Rebundling.html">
+        <li class="chapter active" data-level="2.2" data-path="Optimizing-Rebundling.html">
             
                 
                     <a href="./Optimizing-Rebundling.html">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -664,9 +664,42 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_20">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <p>You might notice after requiring Angular JS into your project that the time it takes from a save to a finished rebundle of your application takes more time. In development you ideally want from 200-800 ms rebundle speed, depending on what part of the application you are working on.</p>
+<h2 id="running-minified-file-in-development">Running minified file in development</h2>
+<p>Instead of making Webpack go through Angular JS and all its dependencies, you can override the behavior in development.</p>
+<p><em>webpack.config.js</em></p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> nodeModules = path.resolve(__dirname, <span class="hljs-string">'node_modules'</span>);
+<span class="hljs-keyword">var</span> pathToAngular = path.resolve(nodeModules, <span class="hljs-string">'angular/angular.min.js'</span>);
+
+<span class="hljs-keyword">var</span> config = {
+  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>),
+  resolve: {
+    alias: {
+      <span class="hljs-string">'angular'</span>: pathToAngular
+    }
+  },
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  <span class="hljs-built_in">module</span>: {
+    noParse: [pathToAngular]
+  }
+};
+
+<span class="hljs-built_in">module</span>.exports = config;
+</code></pre>
+<p>We do two things in this configuration:</p>
+<ol>
+<li><p>Whenever &quot;angular&quot; is required in the code it will fetch the minified Angular JS file instead of going to <em>node_modules</em></p>
+</li>
+<li><p>Whenever Webpack tries to parse the minified file, we stop it, as it is not necessary</p>
+</li>
+</ol>
+<p>Take a look at <a href="Optimizing-development">Optimizing development</a> for more information on this.</p>
 
                     
                     </section>
@@ -677,10 +710,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Configuring-Angular-JS.html" class="navigation navigation-prev " aria-label="Previous page: Configuring Angular JS"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Angular-Template-Cache.html" class="navigation navigation-next " aria-label="Next page: Template Cache"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

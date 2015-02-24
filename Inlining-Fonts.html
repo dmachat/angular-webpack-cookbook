@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Automatic CSS refresh | Angular</title>
+        <title>Inlining fonts | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Loading-LESS-or-SASS.html" />
+    <link rel="next" href="./Deployment-strategies.html" />
     
     
-    <link rel="prev" href="./Loading-CSS.html" />
+    <link rel="prev" href="./Inlining-Images.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="3.5" data-basepath="." data-revision="1424759610063">
     
 
 <div class="book-summary">
@@ -255,7 +255,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.2" data-path="Automatic-CSS-refresh.html">
+        <li class="chapter " data-level="3.2" data-path="Automatic-CSS-refresh.html">
             
                 
                     <a href="./Automatic-CSS-refresh.html">
@@ -303,7 +303,7 @@
         </li>
     
         
-        <li class="chapter " data-level="3.5" data-path="Inlining-Fonts.html">
+        <li class="chapter active" data-level="3.5" data-path="Inlining-Fonts.html">
             
                 
                     <a href="./Inlining-Fonts.html">
@@ -664,9 +664,48 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_3">
+                    <section class="normal" id="section-gitbook_10">
                     
-                        <p>When <strong>webpack-dev-server</strong> is running with <a href="Automatic-browser-refresh">Automatic browser refresh</a> the CSS will also update, but a bit differently. When you do a change to a CSS file the style tag belonging to that file will be updated with the new content... without a refresh!</p>
+                        <p>Fonts can be really difficult to get right. First of all we have typically 4 different formats, but only one of them will be used by the respective browser. You do not want to inline all 4 formats, as that will just bloat your CSS file and in no way be an optimization.</p>
+<h2 id="choose-one-format">Choose one format</h2>
+<p>Depending on your project you might be able to get away with one font format. If you exclude Opera Mini, all browsers support the .woff and .svg format. The thing is that fonts can look a little bit different in the different formats, on the different browsers. So try out .woff and .svg and choose the one that looks the best in all browsers.</p>
+<p>There are probably other strategies here too, so please share by creating an issue or pull request.</p>
+<h2 id="doing-the-actual-inlining">Doing the actual inlining</h2>
+<p>You do this exactly like you do when inlining images. If you haven&#39;t already, add the webpack url-loader <code>npm install url-loader --save-dev</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<span class="hljs-keyword">var</span> config = {
+  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  output: {
+    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    filename: <span class="hljs-string">'bundle.js'</span>
+  },
+  <span class="hljs-built_in">module</span>: {
+    loaders: [
+      {
+        test: <span class="hljs-regexp">/\.woff$/</span>,
+        loader: <span class="hljs-string">'url?limit=100000'</span>
+      },
+      {
+        test: <span class="hljs-regexp">/\.woff2$/</span>,
+        loader: <span class="hljs-string">'url?limit=100000'</span>
+      },
+      {
+        test: <span class="hljs-regexp">/\.ttf$/</span>,
+        loader: <span class="hljs-string">'url?limit=100000'</span>
+      },
+      {
+        test: <span class="hljs-regexp">/\.eot$/</span>,
+        loader: <span class="hljs-string">'file'</span>
+      },
+      {
+        test: <span class="hljs-regexp">/\.svg$/</span>,
+        loader: <span class="hljs-string">'url?limit=100000'</span>
+      }
+    ]
+  }
+};
+</code></pre>
+<p>Just make sure you have a limit above the size of the fonts, or they will of course not be inlined.</p>
 
                     
                     </section>
@@ -677,10 +716,10 @@
         </div>
 
         
-        <a href="./Loading-CSS.html" class="navigation navigation-prev " aria-label="Previous page: Loading CSS"><i class="fa fa-angle-left"></i></a>
+        <a href="./Inlining-Images.html" class="navigation navigation-prev " aria-label="Previous page: Inlining images"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Loading-LESS-or-SASS.html" class="navigation navigation-next " aria-label="Next page: Loading LESS or SASS"><i class="fa fa-angle-right"></i></a>
+        <a href="./Deployment-strategies.html" class="navigation navigation-next " aria-label="Next page: Deployment strategies"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
