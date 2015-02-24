@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.5" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="3.5" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -674,9 +674,9 @@
 <p>You do this exactly like you do when inlining images. If you haven&#39;t already, add the webpack url-loader <code>npm install url-loader --save-dev</code>.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> config = {
-  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  entry: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>)
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../build'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   <span class="hljs-built_in">module</span>: {

@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="4.3" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="4.3" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -676,15 +676,15 @@
 <p><em>webpack.production.config.js</em></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
-<span class="hljs-keyword">var</span> nodeModulesDir = path.resolve(__dirname, <span class="hljs-string">'node_modules'</span>);
+<span class="hljs-keyword">var</span> nodeModulesDir = path.resolve(__dirname, <span class="hljs-string">'../node_modules'</span>);
 
 <span class="hljs-keyword">var</span> config = {
   entry: {
-    app: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>),
+    app: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>),
     vendors: [<span class="hljs-string">'react'</span>] <span class="hljs-comment">// And other vendors</span>
   },
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'dist'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../dist'</span>),
     filename: <span class="hljs-string">'app.js'</span>
   },
   <span class="hljs-built_in">module</span>: {

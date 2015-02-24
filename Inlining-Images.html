@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.4" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="3.4" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -671,9 +671,9 @@
 <p><code>npm install url-loader --save-dev</code> will install the loader that can convert resolved paths as BASE64 strings. As mentioned in other sections of this cookbook Webpack will resolve &quot;url()&quot; statements in your CSS as any other require or import statements. This means that if we test on image file extensions for this loader we can run them through it.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> config = {
-  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  entry: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>)
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../build'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   <span class="hljs-built_in">module</span>: {

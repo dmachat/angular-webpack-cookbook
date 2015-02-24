@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="5.1" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="5.1" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -670,7 +670,7 @@
 <p><em>webpack.config.js</em></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
 <span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
-<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'node_modules'</span>);
+<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'../node_modules'</span>);
 
 <span class="hljs-keyword">var</span> deps = [
   <span class="hljs-string">'angular/angular.min.js'</span>,
@@ -681,10 +681,10 @@
 <span class="hljs-keyword">var</span> config = {
   entry: [
     <span class="hljs-string">'webpack/hot/dev-server'</span>,
-    <span class="hljs-string">'./app/main.js'</span>
+    <span class="hljs-string">'../app/main.js'</span>
   ],
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'./build'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../build'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   resolve: {
@@ -713,7 +713,7 @@ deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
 <p>You might be using distributed versions that requires Angular JS on the global scope. To fix that you can install the expose-loader by <code>npm install expose-loader --save-dev</code> and set up the following config, focusing on the <em>module</em> property:</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
 <span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
-<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'node_modules'</span>);
+<span class="hljs-keyword">var</span> nodeModulesDir = path.join(__dirname, <span class="hljs-string">'../node_modules'</span>);
 
 <span class="hljs-keyword">var</span> deps = [
   <span class="hljs-string">'angular/angular.min.js'</span>,
@@ -722,9 +722,9 @@ deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
 ];
 
 <span class="hljs-keyword">var</span> config = {
-  entry: [<span class="hljs-string">'webpack/hot/dev-server'</span>, <span class="hljs-string">'./app/main.js'</span>],
+  entry: [<span class="hljs-string">'webpack/hot/dev-server'</span>, <span class="hljs-string">'../app/main.js'</span>],
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'./build'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../build'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   resolve: {
@@ -736,14 +736,14 @@ deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</sp
     <span class="hljs-comment">// Use the expose loader to expose the minified Angular JS</span>
     <span class="hljs-comment">// distribution.</span>
     loaders: [{
-      test: path.resolve(node_modules_dir, deps[<span class="hljs-number">0</span>]),
+      test: path.resolve(nodeModulesDir, deps[<span class="hljs-number">0</span>]),
       loader: <span class="hljs-string">"expose?angular"</span>
     }]
   }
 };
 
 deps.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(dep)</span> </span>{
-  <span class="hljs-keyword">var</span> depPath = path.resolve(node_modules_dir, dep);
+  <span class="hljs-keyword">var</span> depPath = path.resolve(nodeModulesDir, dep);
   config.resolve.alias[dep.split(path.sep)[<span class="hljs-number">0</span>]] = depPath;
   config.module.noParse.push(depPath);
 });

@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="4.1" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="4.1" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -696,9 +696,9 @@
 <p>So there really is not much difference in creating the dev and production versions of your webpack config. You basically point to a different output path and there are no workflow configurations or optimizations. What you also want to bring into this configuration is cache handling.</p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> config = {
-  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>)
+  entry: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>)
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'dist'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../dist'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   <span class="hljs-built_in">module</span>: {

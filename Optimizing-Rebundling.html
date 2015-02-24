@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="2.2" data-basepath="." data-revision="1424759610063">
+    <div class="book" data-level="2.2" data-basepath="." data-revision="1424796241345">
     
 
 <div class="book-summary">
@@ -671,18 +671,18 @@
 <p>Instead of making Webpack go through Angular JS and all its dependencies, you can override the behavior in development.</p>
 <p><em>webpack.config.js</em></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
-<span class="hljs-keyword">var</span> nodeModules = path.resolve(__dirname, <span class="hljs-string">'node_modules'</span>);
+<span class="hljs-keyword">var</span> nodeModules = path.resolve(__dirname, <span class="hljs-string">'../node_modules'</span>);
 <span class="hljs-keyword">var</span> pathToAngular = path.resolve(nodeModules, <span class="hljs-string">'angular/angular.min.js'</span>);
 
 <span class="hljs-keyword">var</span> config = {
-  entry: path.resolve(__dirname, <span class="hljs-string">'app/main.js'</span>),
+  entry: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>),
   resolve: {
     alias: {
       <span class="hljs-string">'angular'</span>: pathToAngular
     }
   },
   output: {
-    path: path.resolve(__dirname, <span class="hljs-string">'build'</span>),
+    path: path.resolve(__dirname, <span class="hljs-string">'../build'</span>),
     filename: <span class="hljs-string">'bundle.js'</span>
   },
   <span class="hljs-built_in">module</span>: {
