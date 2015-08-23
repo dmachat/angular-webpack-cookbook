@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="2" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="2" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -670,13 +686,13 @@
 <p>Angular is a JavaScript framework that provides many useful tools and patterns to make it easier and faster to build complex front end application. It can be used in conjuction with a pluggable router and server-side url rewrites to drive a complete complete website, or on it&#39;s own with a small amount of code to build widgets or parts of a larger site.</p>
 <p>Straightforward resource models, two-way bindings, form flow control and validation, simple and powerful animation and customizable components are some of the nice things Angular streamlines for you. It may seem idiomatic, or slightly backwards to once again be working with lots of special inline markup, but you&#39;ll soon realize how powerful this framework is. What used to be hard to control and took many lines of code, is now trivial.</p>
 <h3 id="directives-basics">Directives Basics</h3>
-<p>One way of writing Angular applications is with a focus on directives, which are Angular&#39;s version of web components. You will design your application in smaller pieces, each of which has it own purpose. Some components contain more complexity than others, but may contain some of all of its logic, layout and basic styling. To give you an example of an Angular directive:</p>
+<p>One way of writing Angular applications is with a focus on directives, which are Angular&#39;s version of web components. You will design your application in smaller pieces, each of which has it own purpose. Some components contain more complexity than others, but may contain some or all of its logic, layout and basic styling. To give you an example of an Angular directive:</p>
 <pre><code class="lang-html">
 <span class="hljs-tag">&lt;<span class="hljs-title">todo-item</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"urgent"</span> <span class="hljs-attribute">owner</span>=<span class="hljs-value">"owner"</span> <span class="hljs-attribute">task</span>=<span class="hljs-value">"Make a dinner"</span> /&gt;</span>
 </code></pre>
 <p>You can see a couple of basic features of directives here. We have defined a couple of custom properties in form of <code>owner</code> and <code>task</code>. <code>owner</code> is something that is bound to a variable named <code>owner</code> that exists within the same scope as our directive. For <code>task</code> we provide a fixed value. This value can be accessed from the scope in the directive&#39;s <code>controller</code> or <code>link</code> function.</p>
 <p>In practice you would most likely structure this a little differently to fit your data model better. That goes a little beyond basic Angular, though.</p>
-<p>Angular has some special built-in directives that can help us render a list of Todo Items:</p>
+<p>Angular has some special built-in directives, including <code>ng-repeat</code>, that can help us render a list of Todo Items:</p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"(todoName, todoItem) in todoItems"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">todo-item</span> <span class="hljs-attribute">owner</span>=<span class="hljs-value">"todoItem.owner"</span> <span class="hljs-attribute">task</span>=<span class="hljs-value">"todoItem.task"</span> /&gt;</span>
@@ -687,10 +703,10 @@
 <p>To give you a better idea of what components look like, let&#39;s expand our <code>TodoItem</code> example into code (ES6 + html). I&#39;ve done this below and will walk you through it:</p>
 <p><em>component.html</em></p>
 <pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem'</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-owner'</span>&gt;</span>{{ owner }}<span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-task'</span>&gt;</span>{{ task }}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-likes'</span>&gt;</span>{{ likes }}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-like'</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"likes = likes + 1"</span>&gt;</span>Like<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-owner'</span>&gt;</span>{{ todo.owner }}<span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-task'</span>&gt;</span>{{ todo.task }}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-likes'</span>&gt;</span>{{ todo.likes }}<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">'TodoItem-like'</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"todo.likes = todo.likes + 1"</span>&gt;</span>Like<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 </code></pre>
 <p><em>component.js</em></p>
@@ -704,15 +720,16 @@ angular
       scope: <span class="hljs-literal">true</span>,
       template: template,
       replace: <span class="hljs-literal">true</span>,
-      controller: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($scope, element, attrs)</span> </span>{
-        $scope.owner = attrs.owner;
-        $scope.task = attrs.task;
-        $scope.likes = <span class="hljs-number">0</span>;
+      controllerAs: <span class="hljs-string">'todo'</span>,
+      controller: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrs)</span> </span>{
+        <span class="hljs-keyword">this</span>.owner = attrs.owner;
+        <span class="hljs-keyword">this</span>.task = attrs.task;
+        <span class="hljs-keyword">this</span>.likes = <span class="hljs-number">0</span>;
       }
     }
   });
 </code></pre>
-<p>You can see some basic features of an Angular directive above. We create an isolate scope for our directive by setting <code>scope = true</code>. This keeps the $scope properties in the directive from leaking up. Then we set the initial values of the directive to the data attributes we defined in the directive markup. I added another built-in Angular directive to demonstrate how powerful they can be, by adding ng-click to the likes element. When clicked, the expression inside is evaluated. In this case I decided to implement an extra feature, liking. The current implementation just increments the number of likes per component.</p>
+<p>You can see some basic features of an Angular directive above. We&#39;re be using the newer <code>controllerAs</code> syntax to keep our scope namespace tidy and componetized, and creating an isolate scope for our directive by setting <code>scope = true</code>. This keeps the $scope properties in the directive from leaking up. Then we bind the initial values of the directive to the controller object to match directive markup. For fun, another built-in Angular directive -- <code>ng-click</code> -- to the likes element to demonstrate how powerful they can be. When clicked, the expression inside is evaluated. In this case we can implement an extra feature, liking. The current implementation just increments the number of likes per component.</p>
 <p>In practice you would transmit like counts to a backend and add some validation there but this is a good starting point for understanding how state works in Angular.</p>
 <p>In this example CSS naming has been modeled after <a href="http://suitcss.github.io/" target="_blank">Suit CSS</a> conventions as those look clean to me. That&#39;s just one way to deal with it.</p>
 <h3 id="dealing-with-manipulation">Dealing with Manipulation</h3>

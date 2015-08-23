@@ -22,7 +22,7 @@
     <link rel="next" href="./CSS,-Fonts,-Images.html" />
     
     
-    <link rel="prev" href="./Optimizing-Rebundling.html" />
+    <link rel="prev" href="./Loading-HTML.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="2.3" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="2.4" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter active" data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter active" data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -664,11 +680,26 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_14">
+                    <section class="normal" id="section-gitbook_16">
                     
-                        <ul>
-<li>Show how to use ngtemplate-loader to fill the Angular cache with html templates.</li>
-</ul>
+                        <p>Another powerful tool at our disposal which is made easy by Webpack, is template caching. We saw how we can <a href="Loading-HTML">require html files</a>, and Webpack will convert them to JavaScript friendly strings, but leaves use with a potentially long static string injected in our modules at every point where we need them, and then parsed by our directive or controller. Instead, Angular provides us with the <a href="https://docs.angularjs.org/api/ng/service/$templateCache" target="_blank">$templateCache</a> service, which allows us to register and pre-parse our templates, so they&#39;re reusable anywhere in our app, and faster to compile and interpolate onto the page. We&#39;ll use leverage <a href="https://github.com/WearyMonkey/ngtemplate-loader" target="_blank">ngtemplate-loader</a> with Webpack to take full advantage of it. <code>npm install --save-dev ngtemplate-loader</code> will install the loader, and in your Webpack config file, test for html and apply the loader like this:</p>
+<pre><code class="lang-js">{
+  test: <span class="hljs-regexp">/\.html$/</span>,
+  loader: <span class="hljs-string">'ngtemplate!html'</span>
+}
+</code></pre>
+<p>You can optionally use other html loaders like jade or handlebars in front of ngtemplate. ngtemplate-loader will add html to the Angular global module&#39;s $templateCache using the <code>put</code> method in the module run stage, so these templates will always be available via the <code>$get</code> method, which is what is used internally whenever you require templates in Angular using <code>templateUrl</code> or <code>&lt;ng-include src=</code>. You can also use <code>$get</code> manually if you need to compile the templates yourself. Because of this, keep in mind a very important parameter for ngtemplate, <code>relativeTo</code>. Essentially, for namespacing purposes, the templates are stored <em>as if</em> they are being loaded in your app&#39;s public path. A directive might look like this:</p>
+<p><em>app/js/directives/templateTest/templateTest.js</em></p>
+<pre><code class="lang-js">import template from <span class="hljs-string">'./templateTest.html'</span>;
+<span class="hljs-comment">// console.log(template) -&gt; 'app/js/directives/templateTest/templateTest.html</span>
+
+angular.module(<span class="hljs-string">'templateTest'</span>, []).directive(<span class="hljs-string">'templateTest'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">return</span> {
+    templateUrl: template
+  }
+});
+</code></pre>
+<p>Notice how we get a url back when we import the html file, instead of a string of html? This url serves as the &quot;key&quot; for <code>$templateCache.$get</code>. In this case, <code>relativeTo=/app/</code> would give us a return value of <code>js/directives/templateTest/templateTest.html</code> above.</p>
 
                     
                     </section>
@@ -679,7 +710,7 @@
         </div>
 
         
-        <a href="./Optimizing-Rebundling.html" class="navigation navigation-prev " aria-label="Previous page: Optimizing rebundling"><i class="fa fa-angle-left"></i></a>
+        <a href="./Loading-HTML.html" class="navigation navigation-prev " aria-label="Previous page: Loading HTML Templates"><i class="fa fa-angle-left"></i></a>
         
         
         <a href="./CSS,-Fonts,-Images.html" class="navigation navigation-next " aria-label="Next page: CSS, Fonts and Images"><i class="fa fa-angle-right"></i></a>

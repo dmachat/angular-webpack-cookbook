@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="1.1" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="1.1" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -671,7 +687,7 @@
 </blockquote>
 <p>Getting started with Webpack is straightforward. I&#39;ll show you how to set up a simple project based on it. As a first step, set a directory for your project and hit <code>npm init</code> and fill in some answers. That will create a <code>package.json</code> for you. Don&#39;t worry if some fields don&#39;t look ok, you can modify those later.</p>
 <h2 id="installing-webpack">Installing Webpack</h2>
-<p>Next you should get Webpack installed. You can either do a global install (<code>npm i webpack -g</code>) or a local one (<code>npm i webpack</code>). In former case you&#39;ll be able to invoke the tool simply via <code>webpack</code>. In latter case you can use <code>node_modules/.bin/webpack</code>. Either way works for now.</p>
+<p>Next you should get Webpack installed. We&#39;ll do a local install and save it as a project dependency. This way you can invoke the build anywhere (build server, whatnot). Run <code>npm i webpack --save-dev</code>. If you want to run the tool, hit <code>node_modules/.bin/webpack</code>.</p>
 <h2 id="directory-structure">Directory Structure</h2>
 <p>Structure your project like this:</p>
 <ul>
@@ -742,10 +758,10 @@
 <h2 id="running-the-application">Running the Application</h2>
 <p>Just double-click the <em>index.html</em> file or set up a web server pointing to the <code>build/</code> folder.</p>
 <h2 id="setting-up-packagejson-scripts">Setting Up <code>package.json</code> <em>scripts</em></h2>
-<p>It&#39;s easiest to run build, serve and other commands through <code>npm</code>. Since webpack does all the bundling and optimizing that we&#39;ll need, you don&#39;t have to worry about other technology in the project, such as a task runner like gulp or grunt. You just invoke the commands. This can be achieved easily by setting up a <code>scripts</code> section to <code>package.json</code>.</p>
+<p>It can be useful to run build, serve and such commands through <code>npm</code>. That way you don&#39;t have to worry about the technology used in the project. You just invoke the commands. This can be achieved easily by setting up a <code>scripts</code> section to <code>package.json</code>.</p>
 <p>In this case we can move the build step behind <code>npm run build</code> like this:</p>
 <ol>
-<li><code>npm i webpack --save</code> - If you want to install Webpack just a development dependency, you can use <code>--save-dev</code>. This is handy if you are developing a library and don&#39;t want it to depend on the tool (bad idea!).</li>
+<li><code>npm i webpack --save</code> - If you want to install Webpack just as a development dependency, you can use <code>--save-dev</code>. This is handy if you are developing a library and don&#39;t want it to depend on the tool (bad idea!).</li>
 <li>Add the following to <code>package.json</code>:</li>
 </ol>
 <pre><code class="lang-json">  &quot;scripts&quot;: {

@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="1.2" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="1.2" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -664,7 +680,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_23">
+                    <section class="normal" id="section-gitbook_25">
                     
                         <p>Hitting <code>npm run build</code> all the time will get boring eventually. Fortunately we can work around that quite easily. Let&#39;s set up <code>webpack-dev-server</code>.</p>
 <h2 id="setting-up-webpack-dev-server">Setting up <code>webpack-dev-server</code></h2>
@@ -673,7 +689,7 @@
 <pre><code class="lang-json">{
   "<span class="hljs-attribute">scripts</span>": <span class="hljs-value">{
     "<span class="hljs-attribute">build</span>": <span class="hljs-value"><span class="hljs-string">"webpack"</span></span>,
-    "<span class="hljs-attribute">dev</span>": <span class="hljs-value"><span class="hljs-string">"webpack-dev-server --devtool eval --progress --colors --hot --content-base build"</span>
+    "<span class="hljs-attribute">dev</span>": <span class="hljs-value"><span class="hljs-string">"webpack-dev-server --devtool eval --config config/webpack.config.js --progress --colors --hot --content-base build"</span>
   </span>}
 </span>}
 </code></pre>
@@ -681,6 +697,7 @@
 <ol>
 <li><code>webpack-dev-server</code> - Starts a web service on localhost:8080</li>
 <li><code>--devtool eval</code> - Creates source urls for your code. Making you able to pinpoint by filename and line number where any errors are thrown</li>
+<li><code>--config config/webpack.config.js</code> - If you followed the directory structure from Getting Started, this points webpack to the relative config file</li>
 <li><code>--progress</code> - Will show progress of bundling your application</li>
 <li><code>--colors</code> - Yay, colors in the terminal!</li>
 <li><code>--content-base build</code> - Points to the output directory configured</li>

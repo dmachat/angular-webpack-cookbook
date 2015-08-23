@@ -10,6 +10,7 @@
 * [Angular JS](Introduction-to-Angular-JS)
     * [Configuring Angular JS](Configuring-Angular-JS)
     * [Optimizing rebundling](Optimizing-Rebundling)
+    * [Loading HTML Templates](Loading-HTML)
     * [Template Cache](Angular-Template-Cache)
 * [CSS, Fonts and Images](CSS,-Fonts,-Images)
     * [Loading CSS](Loading-CSS)

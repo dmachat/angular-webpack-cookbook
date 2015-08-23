@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="4.3" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="4.3" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -664,7 +680,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_25">
+                    <section class="normal" id="section-gitbook_27">
                     
                         <p>When your application is depending on other libraries, especially large ones like Angular JS, you should consider splitting those dependencies into its own vendors bundle. This will allow you to do updates to your application, without requiring the users to download the vendors bundle again. Use this strategy when:</p>
 <ul>
@@ -681,7 +697,7 @@
 <span class="hljs-keyword">var</span> config = {
   entry: {
     app: path.resolve(__dirname, <span class="hljs-string">'../app/main.js'</span>),
-    vendors: [<span class="hljs-string">'react'</span>] <span class="hljs-comment">// And other vendors</span>
+    vendors: [<span class="hljs-string">'angular'</span>] <span class="hljs-comment">// And other vendors</span>
   },
   output: {
     path: path.resolve(__dirname, <span class="hljs-string">'../dist'</span>),
@@ -702,6 +718,8 @@
 <span class="hljs-built_in">module</span>.exports = config;
 </code></pre>
 <p>This configuration will create two files in the <code>dist/</code> folder. <strong>app.js</strong> and <strong>vendors.js</strong>.</p>
+<h4 id="important">Important!</h4>
+<p>Remember to add both files to your HTML file, or you will get the error: <code>Uncaught ReferenceError: webpackJsonp is not defined</code>.</p>
 
                     
                     </section>

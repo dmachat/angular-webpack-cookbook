@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
-        <title>Loading LESS or SASS | Angular</title>
+        <title>Loading HTML Templates | Angular</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 1.5.0">
@@ -19,10 +19,10 @@
         
     
     
-    <link rel="next" href="./Inlining-Images.html" />
+    <link rel="next" href="./Angular-Template-Cache.html" />
     
     
-    <link rel="prev" href="./Automatic-CSS-refresh.html" />
+    <link rel="prev" href="./Optimizing-Rebundling.html" />
     
 
         
@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="3.3" data-basepath="." data-revision="1440371004229">
+    <div class="book" data-level="2.3" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,7 +201,7 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+        <li class="chapter active" data-level="2.3" data-path="Loading-HTML.html">
             
                 
                     <a href="./Loading-HTML.html">
@@ -287,7 +287,7 @@
         </li>
     
         
-        <li class="chapter active" data-level="3.3" data-path="Loading-LESS-or-SASS.html">
+        <li class="chapter " data-level="3.3" data-path="Loading-LESS-or-SASS.html">
             
                 
                     <a href="./Loading-LESS-or-SASS.html">
@@ -680,11 +680,13 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_1">
                     
-                        <p>If you want to use compiled CSS, there are two loaders available for you. The <strong>less-loader</strong> and the <strong>sass-loader</strong>. Depending on your preference, this is how you set it up.</p>
-<h2 id="installing-and-configuring-the-loader">Installing and configuring the loader</h2>
-<p><code>npm install less-loader</code> or <code>npm install sass-loader</code>.</p>
+                        <p>Webpack allows you to load HTML like you load any other code. This allows you to do things like require images or vector graphics in your templates, pre-process them using the templating language of your choice like jade or handlebars, and optimize the loading and reuse of templates by <a href="Angular-Template-Cache">template caching</a>.</p>
+<p>Loading HTML requires the <strong>html-loader</strong>, which will parse the HTML and return it as a function with an html string value of your template. You can use that function in places that take an html string, like <code>template</code> or in a <code>$compile</code>.</p>
+<h2 id="preparing-html-loading">Preparing HTML loading</h2>
+<p>Install the loader: <code>npm install html-loader --save-dev</code>.</p>
+<p>In the <em>webpack.config.js</em> file you can add the following loader configuration:</p>
 <p><em>webpack.config.js</em></p>
 <pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> config = {
@@ -695,28 +697,31 @@
   },
   <span class="hljs-built_in">module</span>: {
     loaders: [
-      <span class="hljs-comment">// LESS</span>
       {
-        test: <span class="hljs-regexp">/\.less$/</span>,
-        loader: <span class="hljs-string">'style!css!less'</span>
-      },
-
-      <span class="hljs-comment">// SASS</span>
-      {
-        test: <span class="hljs-regexp">/\.scss$/</span>,
-        loader: <span class="hljs-string">'style!css!sass'</span>
+        test: <span class="hljs-regexp">/\.html$/</span>, <span class="hljs-comment">// Only .html files</span>
+        loader: <span class="hljs-string">'html'</span> <span class="hljs-comment">// Run html loader</span>
       }
     ]
   }
 };
+
+<span class="hljs-built_in">module</span>.exports = config;
 </code></pre>
-<h2 id="what-about-imports-in-less-and-sass">What about imports in LESS and SASS?</h2>
-<p>If you import one LESS/SASS file from an other, use the exact same pattern as anywhere else. Webpack will dig into these files and figure out the dependencies.</p>
-<pre><code class="lang-less"><span class="hljs-at_rule">@import</span> <span class="hljs-string">"./variables.less"</span>;
+<h2 id="loading-an-html-file">Loading an HTML file</h2>
+<p>Loading an HTML file is a simple as loading any file:</p>
+<p><em>main.js</em></p>
+<pre><code class="lang-javascript">import <span class="hljs-string">'./main.html'</span>;
+<span class="hljs-comment">// Other code</span>
 </code></pre>
-<p>You can also load LESS files directly from your node_modules directory. Prepending the <code>~</code> resolves the dependency as a module, instead of a relative file path.</p>
-<pre><code class="lang-less">$import &quot;~bootstrap/less/bootstrap&quot;;
+<p><em>component.js</em></p>
+<pre><code class="lang-javascript">import <span class="hljs-string">'./component.html'</span>;
+import myComponent from <span class="hljs-string">'./myComponent.js'</span>;
+
+angular
+  .module(<span class="hljs-string">'myDirectives'</span>, [])
+  .directives(<span class="hljs-string">'myComponent'</span>, myComponent);
 </code></pre>
+<p><strong>Note!</strong> You can of course do this with both CommonJS and AMD.</p>
 
                     
                     </section>
@@ -727,10 +732,10 @@
         </div>
 
         
-        <a href="./Automatic-CSS-refresh.html" class="navigation navigation-prev " aria-label="Previous page: Automatic CSS refresh"><i class="fa fa-angle-left"></i></a>
+        <a href="./Optimizing-Rebundling.html" class="navigation navigation-prev " aria-label="Previous page: Optimizing rebundling"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="./Inlining-Images.html" class="navigation navigation-next " aria-label="Next page: Inlining images"><i class="fa fa-angle-right"></i></a>
+        <a href="./Angular-Template-Cache.html" class="navigation navigation-next " aria-label="Next page: Template Cache"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

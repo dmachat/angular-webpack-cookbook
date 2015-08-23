@@ -34,7 +34,7 @@
 
 
         
-    <div class="book" data-level="4.4" data-basepath="." data-revision="1424796241345">
+    <div class="book" data-level="4.4" data-basepath="." data-revision="1440371004229">
     
 
 <div class="book-summary">
@@ -201,13 +201,29 @@
         </li>
     
         
-        <li class="chapter " data-level="2.3" data-path="Angular-Template-Cache.html">
+        <li class="chapter " data-level="2.3" data-path="Loading-HTML.html">
+            
+                
+                    <a href="./Loading-HTML.html">
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                         Loading HTML Templates
+                    </a>
+                
+            
+            
+        </li>
+    
+        
+        <li class="chapter " data-level="2.4" data-path="Angular-Template-Cache.html">
             
                 
                     <a href="./Angular-Template-Cache.html">
                         <i class="fa fa-check"></i>
                         
-                            <b>2.3.</b>
+                            <b>2.4.</b>
                         
                          Template Cache
                     </a>
@@ -664,7 +680,7 @@
                 <div class="page-inner">
                 
                 
-                    <section class="normal" id="section-gitbook_17">
+                    <section class="normal" id="section-gitbook_19">
                     
                         <p>Maybe you are building an application that has multiple urls. An example of this would be a solution where you have two, or more, different URLs responding with different pages. Maybe you have one user page and one admin page. They both share a lot of code, but you do not want to load all the admin stuff for normal users. That is a good scenario for using multiple entry points. A list of use cases could be:</p>
 <ul>
@@ -672,8 +688,8 @@
 <li>You have a mobile version using less components</li>
 <li>You have a typical user/admin application where you do not want to load all the admin code for a normal user</li>
 </ul>
-<p>Let us create an example with a mobile experience using less components: webpack.production.config.js</p>
-<pre><code class="lang-javascript"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
+<p>Let us create an example with a mobile experience using less components: <em>webpack.production.config.js</em></p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);
 <span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">'webpack'</span>);
 <span class="hljs-keyword">var</span> nodeModulesDir = path.resolve(__dirname, <span class="hljs-string">'../node_modules'</span>);
 

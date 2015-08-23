@@ -1,6 +1,6 @@
 [Gitbook version](http://dmachat.github.io/angular-webpack-cookbook/)
 
-> **Work in progress!** We welcome feedback at [our issue tracker](https://github.com/dmachat/angular-webpack-cookbook/issues).
+> In case you want to contribute, please create a PR against the [main repo](https://github.com/dmachat/angular-webpack-cookbook) or contact us through the [issue tracker](https://github.com/dmachat/angular-webpack-cookbook/issues).
 
 Inspiration for, and much of the webpack content in this cookbook comes from [christianalfoni/react-webpack-cookbook](https://github.com/christianalfoni/react-webpack-cookbook/wiki). Check it out if you want to know more about Webpack and React.
 
