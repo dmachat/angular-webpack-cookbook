@@ -18,7 +18,7 @@ function main() {
     ),
     generateSummary.bind(null, {
       input: path.join(root, '_Sidebar.md'),
-      output: path.join(root, 'summary.md')
+      output: path.join(root, 'SUMMARY.md')
     }),
     generateGitbook.bind(null, {
       input: root,
