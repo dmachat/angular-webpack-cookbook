@@ -35,11 +35,11 @@ function generateWiki(input, output, cb) {
             path.join(output, 'Home.md')
         ),
         generateSidebar.bind(null, {
-            input: path.join(input, 'summary.md'),
+            input: path.join(input, 'SUMMARY.md'),
             output: path.join(output, '_Sidebar.md')
         }),
         fs.remove.bind(null, path.join(output, 'README.md')),
-        fs.remove.bind(null, path.join(output, 'summary.md')),
+        fs.remove.bind(null, path.join(output, 'SUMMARY.md')),
     ], cb);
 }
 
