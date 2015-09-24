@@ -1,11 +1,14 @@
 {
   "name": "angular-webpack-cookbook",
   "version": "0.0.0",
-  "description": "Angular, WebPack cookbook generator",
+  "description": "Angular, Webpack cookbook generator",
   "main": "./index.js",
   "scripts": {
-    "gitbook": "node ./scripts/gitbook.js",
-    "deploy": "node ./scripts/deploy-gh-pages.js",
+    "generate-gitbook": "gitbook build ./content ./gh-pages",
+    "generate-wiki": "node ./scripts/generate-wiki.js",
+    "deploy-gitbook": "node ./scripts/deploy-gh-pages.js",
+    "deploy-wiki": "./scripts/deploy-wiki.sh",
+    "generate-and-deploy": "npm run generate-gitbook && npm run generate-wiki && npm run deploy-gitbook && npm run deploy-wiki",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,9 +27,8 @@
   "homepage": "https://github.com/dmachat/angular-webpack-cookbook",
   "dependencies": {
     "async": "^0.9.0",
-    "fs-extra": "^0.16.3",
+    "fs-extra": "^0.18.2",
     "gh-pages": "^0.2.0",
-    "gitbook": "^1.5.0"
-  },
-  "devDependencies": {}
+    "gitbook-cli": "^0.3.3"
+  }
 }
