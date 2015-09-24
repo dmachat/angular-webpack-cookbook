@@ -1,0 +1,1 @@
+The Angular Webpack Cookbook is a work in progress by @dmachat, based on the React Webpack cookbook by @bebraw and @christianalfoni
