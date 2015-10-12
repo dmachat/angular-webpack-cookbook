@@ -101,11 +101,11 @@ In this case we can move the build step behind `npm run build` like this:
 
 ```json
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --config config/webpack.config.js"
   }
 ```
 
-To invoke a build, you can hit `npm run build` now.
+To invoke a build, you can hit `npm run build` now. Keep in mind that you need to specify the webpack config path with `--config path` because the config is located in the `config` folder and not the main folder.
 
 Later on this approach will become more powerful as project complexity grows. You can hide the complexity within `scripts` while keeping the interface simple.
 
