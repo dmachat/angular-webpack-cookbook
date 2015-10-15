@@ -8,7 +8,7 @@ As a first step, hit `npm i webpack-dev-server --save`. In addition we'll need t
 ```json
 {
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config config/webpack.config.js",
     "dev": "webpack-dev-server --devtool eval --config config/webpack.config.js --progress --colors --hot --content-base build"
   }
 }
