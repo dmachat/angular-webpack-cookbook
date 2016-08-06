@@ -35,7 +35,7 @@ To give you a better idea of what components look like, let's expand our `TodoIt
 *component.html*
 ```html
 <div class='TodoItem'>
-  <span class='TodoItem-owner'>{{ todo.owner }}<span>
+  <span class='TodoItem-owner'>{{ todo.owner }}</span>
   <span class='TodoItem-task'>{{ todo.task }}</span>
   <span class='TodoItem-likes'>{{ todo.likes }}</span>
   <span class='TodoItem-like' ng-click="todo.likes = todo.likes + 1">Like</span>
