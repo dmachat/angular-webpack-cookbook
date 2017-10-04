@@ -1,6 +1,6 @@
 ## Modules
 
-Webpack allows you to use different module patterns, but "under the hood" they all work the same way. All of them also works straight out of the box.
+Webpack allows you to use different module patterns, but "under the hood" they all work the same way. All of them also work straight out of the box.
 
 #### ES6 modules
 

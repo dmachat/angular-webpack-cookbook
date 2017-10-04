@@ -28,4 +28,4 @@ module.exports = config;
 Now you can use all the functionality Babel provides.
 
 ## ES6 and Angular
-You may use ES6 syntax syntax in most cases without problems with Angular 1.x, and in some cases you can use ES6 types and constructors, but keep in mind Angular was not written for ES6, so for example you can define services as a `Class`, but not a factory, since they expect different constructors. This could lead to some messy code, but you can choose how you'd like to take advantage of ES6.
+You may use ES6 syntax in most cases without problems with Angular 1.x, and in some cases you can use ES6 types and constructors, but keep in mind Angular was not written for ES6, so for example you can define services as a `Class`, but not a factory, since they expect different constructors. This could lead to some messy code, but you can choose how you'd like to take advantage of ES6.
