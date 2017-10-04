@@ -63,7 +63,7 @@ import './project-styles.css';
 // Other JS code
 ```
 
-The CSS is included in the application bundle and does not need to download.
+The CSS is included in the application bundle, hence no extra file needs to be downloaded.
 
 
 ### Lazy loading
